@@ -78,7 +78,9 @@ func Start(keybaseLocation string) (*API, error) {
 		return nil, err
 	}
 
+	buf := make([]byte, 0, 64*1024)
 	boutput := bufio.NewScanner(output)
+	boutput.Buffer(buf, 1024*1024)
 	return &API{
 		input:    input,
 		output:   boutput,
